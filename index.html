@@ -9,34 +9,60 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+    />
     <link rel="stylesheet" href="./styles/app.css" />
     <title>IP Address Tracker</title>
   </head>
   <body>
-    <header>
-      <h1>IP Address Tracker</h1>
-      <form action="">
+    <header class="header">
+      <h1 class="header__title">IP Address Tracker</h1>
+      <form class="header__form" action="">
         <div class="input-control">
           <input
+            class="input"
             type="text"
             placeholder="Search for any IP address or domain"
           />
-          <button type="submit"></button>
+          <button class="submit-button" type="submit">
+            <i class="material-icons-round"> navigate_next </i>
+          </button>
         </div>
       </form>
     </header>
-    IP Address Location Timezone UTC
-    <!-- add offset value dynamically using the API -->
-    ISP
-
-    <button onclick="req()">Request</button>
-
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
-    </div>
+    <main>
+      <button onclick="req()">Request</button>
+      <div>
+        <div>
+          <h2>IP Address</h2>
+          <span></span>
+        </div>
+        <div>
+          <h2>Location</h2>
+          <span></span>
+        </div>
+        <div>
+          <h2>Timezone</h2>
+          <span></span>
+        </div>
+        <div>
+          <h2>ISP</h2>
+          <span></span>
+        </div>
+      </div>
+      <div></div>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Your Name Here</a>.
+      </div>
+    </footer>
+    UTC
 
     <script src="./javascript/app.js"></script>
   </body>
