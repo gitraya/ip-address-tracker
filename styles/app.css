@@ -186,6 +186,9 @@ footer {
 }
 
 @media screen and (max-width: 900px) {
+  .main__content {
+    height: auto;
+  }
   .info-item:nth-last-of-type(1) {
     flex: 0.7 0.7 0px;
   }
@@ -200,9 +203,6 @@ footer {
 @media screen and (max-width: 768px) {
   .header__form {
     width: 65%;
-  }
-  .main__content {
-    height: auto;
   }
 }
 
