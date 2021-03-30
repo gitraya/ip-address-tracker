@@ -95,6 +95,7 @@ async function submitData(e) {
   const inputValue = e.target.querySelector('.input').value;
 
   // check valid input
+  if (!inputValue) return;
   checkInputValue(inputValue);
 
   ipData = await fetchData(ipUrl, ipUrlParams);
