@@ -1,3 +1,31 @@
+// initialize map data
+let map = L.map('mapid'),
+  marker;
+let layer = new L.tileLayer(
+  'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+  {
+    attribution:
+      'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: config.MAP_TOKEN,
+  }
+);
+let markerIcon = L.icon({
+  iconUrl: '../../images/icon-location.svg',
+});
+map.addLayer(layer);
+
+// function to update map data
+function updateMap(lat, lng) {
+  map.setView([lat, lng], 14);
+  marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+  return;
+}
+
+// url ip geolocation API
 const ipUrl = new URL('https://geo.ipify.org/api/v1?');
 let ipParams = {
   apiKey: config.IPIFY,
@@ -7,57 +35,86 @@ let ipParams = {
 let ipUrlParams = new URLSearchParams({ ...ipParams });
 let ipData = new Object();
 
-const form = document.querySelector('.header__form');
-form.onsubmit = submitData;
-
+// fetching data from API
 async function fetchData(url, params) {
   let fetchData;
   await fetch(url + params)
     .then((res) => res.json())
     .then((data) => {
+      if (data.messages) {
+        return (fetchData = {
+          message:
+            'Unable to find the data you requested, it may be that the domain or IP address is not available!',
+        });
+      }
       fetchData = data;
-      console.log(fetchData);
     })
     .catch((err) => console.log(err));
   return fetchData;
 }
 
+// set API data to elements
 function setDataToElement(data) {
-  if (data) {
-    document.querySelector('.js-ip-address').innerText = data.ip;
-    document.querySelector(
-      '.js-location'
-    ).innerText = `${data.location.city}, ${data.location.country} ${data.location.geonameId}`;
-    document.querySelector(
-      '.js-timezone'
-    ).innerText = `UTC ${data.location.timezone}`;
-    document.querySelector('.js-isp').innerText = data.isp;
-  }
-  return;
+  document.querySelector('.js-ip-address').innerText = data.ip;
+  document.querySelector(
+    '.js-location'
+  ).innerText = `${data.location.city}, ${data.location.country} ${data.location.geonameId}`;
+  document.querySelector(
+    '.js-timezone'
+  ).innerText = `UTC ${data.location.timezone}`;
+  document.querySelector('.js-isp').innerText = data.isp;
 }
 
-async function submitData(e) {
-  e.preventDefault();
+// function to check valid domain or valid ip address
+function checkInputValue(inputValue) {
   const ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
   const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/;
 
+  if (ipRegex.test(inputValue)) {
+    return (ipUrlParams = new URLSearchParams({
+      ...ipParams,
+      ipAddress: inputValue,
+    }));
+  } else if (domainRegex.test(inputValue)) {
+    return (ipUrlParams = new URLSearchParams({
+      ...ipParams,
+      domain: inputValue,
+    }));
+  } else {
+    return alert('Please enter the correct domain format or IP address!');
+  }
+}
+
+// form element
+const form = document.querySelector('.header__form');
+form.onsubmit = submitData;
+
+// function to submit form data
+async function submitData(e) {
+  e.preventDefault();
   const inputValue = e.target.querySelector('.input').value;
 
-  if (!inputValue) return;
-  if (ipRegex.test(inputValue))
-    ipUrlParams = new URLSearchParams({ ...ipParams, ipAddress: inputValue });
-  else if (domainRegex.test(inputValue))
-    ipUrlParams = new URLSearchParams({ ...ipParams, domain: inputValue });
-  else return;
+  // check valid input
+  checkInputValue(inputValue);
 
   ipData = await fetchData(ipUrl, ipUrlParams);
-  setDataToElement(ipData);
 
+  // if the domain or ip address is not available then display a message
+  if (ipData.message) return alert(ipData.message);
+
+  // update the data to the element
+  setDataToElement(ipData);
+  updateMap(ipData.location.lat, ipData.location.lng);
+
+  // reset data
   e.target.querySelector('.input').value = '';
   ipUrlParams = new URLSearchParams({ ...ipParams, ipAddress: '', domain: '' });
 }
 
 window.onload = async function initApp() {
   ipData = await fetchData(ipUrl, ipUrlParams);
+
+  // set data
   setDataToElement(ipData);
+  updateMap(ipData.location.lat, ipData.location.lng);
 };
