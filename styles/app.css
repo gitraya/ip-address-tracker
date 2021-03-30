@@ -15,11 +15,13 @@ body {
 
 .header {
   width: 100vw;
-  height: 35vh;
+  height: 42.5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: url('../images/pattern-bg.png');
+  background-position: center;
+  background-size: cover;
 }
 .header__title {
   color: #fff;
@@ -39,6 +41,15 @@ body {
   border-radius: 16px;
   width: 100%;
   font-size: 1.125rem;
+  color: hsl(0, 0%, 17%);
+  border: 2px solid #fff;
+}
+.input:focus {
+  outline: none !important;
+  border-color: hsl(0, 0%, 17%);
+}
+.input::placeholder {
+  color: hsl(0, 0%, 59%);
 }
 .submit-button {
   height: 100%;
@@ -46,17 +57,33 @@ body {
   border-radius: 0px 16px 16px 0px;
   color: #fff;
   background-color: hsl(0, 0%, 17%);
-  border: none;
+  border: 2px solid hsl(0, 0%, 17%);
   position: absolute;
   right: 0px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 }
+.submit-button:focus {
+  outline: none !important;
+}
+
 .submit-button i {
   font-size: 1.85rem;
 }
 /* - Very Dark Gray: hsl(0, 0%, 17%)
 - Dark Gray: hsl(0, 0%, 59%) */
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.main__content {
+  width: 70%;
+  display: flex;
+  align-self: center;
+}
 
 .attribution {
   font-size: 11px;
