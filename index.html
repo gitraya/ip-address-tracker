@@ -19,9 +19,10 @@
   <body>
     <header class="header">
       <h1 class="header__title">IP Address Tracker</h1>
-      <form class="header__form" action="">
+      <form class="header__form">
         <div class="input-control">
           <input
+            name="search"
             class="input"
             type="text"
             placeholder="Search for any IP address or domain"
@@ -31,27 +32,37 @@
           </button>
         </div>
       </form>
-    </header>
-    <main class="main">
       <div class="main__content">
         <div class="info-item">
-          <h2>IP Address</h2>
-          <span></span>
+          <div>
+            <h2>IP Address</h2>
+            <span class="js-ip-address"></span>
+          </div>
+          <div class="line"></div>
         </div>
         <div class="info-item">
-          <h2>Location</h2>
-          <span></span>
+          <div>
+            <h2>Location</h2>
+            <span class="js-location"></span>
+          </div>
+          <div class="line"></div>
         </div>
         <div class="info-item">
-          <h2>Timezone</h2>
-          <span></span>
+          <div>
+            <h2>Timezone</h2>
+            <span class="js-timezone"></span>
+          </div>
+          <div class="line"></div>
         </div>
         <div class="info-item">
-          <h2>ISP</h2>
-          <span></span>
+          <div>
+            <h2>ISP</h2>
+            <span class="js-isp"></span>
+          </div>
         </div>
       </div>
-      <button onclick="req()">Request</button>
+    </header>
+    <main class="main">
       <div></div>
     </main>
     <footer>
