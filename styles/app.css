@@ -201,6 +201,9 @@ footer {
   .header__form {
     width: 65%;
   }
+  .main__content {
+    height: auto;
+  }
 }
 
 /* mobile device */
@@ -211,7 +214,6 @@ footer {
   .main__content {
     top: 175px;
     bottom: unset;
-    height: auto;
     flex-direction: column;
   }
   .info-item {
