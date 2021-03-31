@@ -37,10 +37,9 @@ let ipData = new Object();
 
 // fetching data from API
 async function fetchData(url, params) {
-  let data;
   try {
     const jsonData = await fetch(url + params);
-    data = await jsonData.json();
+    const data = await jsonData.json();
     if (data.messages)
       return (data = {
         message:
