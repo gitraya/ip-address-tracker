@@ -25,7 +25,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](https://github.com/gitraya/ip-address-tracker/blob/main/images/overviewiptracker.png)
+![](https://github.com/gitraya/ip-address-tracker/blob/main/public/images/overviewiptracker.png)
 
 ### Links
 
