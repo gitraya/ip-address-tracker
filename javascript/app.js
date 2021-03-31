@@ -41,13 +41,12 @@ async function fetchData(url, params) {
   await fetch(url + params)
     .then((res) => res.json())
     .then((data) => {
-      if (data.messages) {
-        return (fetchData = {
-          message:
-            'Unable to find the data you requested, it may be that the domain or IP address is not available!',
-        });
-      }
-      fetchData = data;
+      data.messages
+        ? (fetchData = {
+            message:
+              'Unable to find the data you requested, it may be that the domain or IP address is not available!',
+          })
+        : (fetchData = data);
     })
     .catch((err) => console.log(err));
   return fetchData;
