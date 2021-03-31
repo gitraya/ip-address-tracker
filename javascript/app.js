@@ -37,19 +37,19 @@ let ipData = new Object();
 
 // fetching data from API
 async function fetchData(url, params) {
-  let fetchData;
-  await fetch(url + params)
-    .then((res) => res.json())
-    .then((data) => {
-      data.messages
-        ? (fetchData = {
-            message:
-              'Unable to find the data you requested, it may be that the domain or IP address is not available!',
-          })
-        : (fetchData = data);
-    })
-    .catch((err) => console.log(err));
-  return fetchData;
+  let data;
+  try {
+    const jsonData = await fetch(url + params);
+    data = await jsonData.json();
+    if (data.messages)
+      return (data = {
+        message:
+          'Unable to find the data you requested, it may be that the domain or IP address is not available!',
+      });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // set API data to elements
