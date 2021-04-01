@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/gitraya/ip-address-tracker#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
     "dotenv-webpack": "^7.0.2",
     "file-loader": "^6.2.0",
