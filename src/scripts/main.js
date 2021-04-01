@@ -1,5 +1,3 @@
-import config from './config.js';
-
 const main = () => {
   // initialize map data
   let map, marker, markerIcon;
@@ -15,7 +13,7 @@ const main = () => {
           id: 'mapbox/streets-v11',
           tileSize: 512,
           zoomOffset: -1,
-          accessToken: config.MAP_TOKEN,
+          accessToken: process.env.MAP_TOKEN,
         }
       )
     );
@@ -35,7 +33,7 @@ const main = () => {
   // url ip geolocation API
   const ipUrl = new URL('https://geo.ipify.org/api/v1?');
   let ipParams = {
-    apiKey: config.IPIFY,
+    apiKey: process.env.IPIFY,
     ipAddress: '',
     domain: '',
   };

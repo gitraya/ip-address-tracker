@@ -1,0 +1,25 @@
+{
+  "name": "ip-address-tracker",
+  "version": "1.0.0",
+  "description": "This is a solution to the [IP address tracker challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0). Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitraya/ip-address-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gitraya/ip-address-tracker/issues"
+  },
+  "homepage": "https://github.com/gitraya/ip-address-tracker#readme",
+  "devDependencies": {
+    "dotenv-webpack": "^7.0.2",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
