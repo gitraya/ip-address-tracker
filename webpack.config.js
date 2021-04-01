@@ -1,5 +1,6 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
@@ -8,7 +9,6 @@ module.exports = {
     filename: 'bundle.js',
   },
   mode: 'production',
-  plugins: [new Dotenv()],
   module: {
     rules: [
       /* babel loader */
@@ -56,4 +56,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new Dotenv(),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: 'index.html',
+    }),
+  ],
 };

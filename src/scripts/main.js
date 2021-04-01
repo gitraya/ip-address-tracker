@@ -85,9 +85,8 @@ const main = () => {
         ...ipParams,
         domain: inputValue,
       }));
-    } else {
-      return alert('Please enter the correct domain format or IP address!');
     }
+    return alert('Please enter the correct domain format or IP address!');
   }
 
   // form element
