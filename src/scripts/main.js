@@ -1,3 +1,5 @@
+import iconLocation from '../images/icon-location.svg';
+
 const main = () => {
   // initialize map data
   let map, marker, markerIcon;
@@ -18,7 +20,7 @@ const main = () => {
       )
     );
     markerIcon = L.icon({
-      iconUrl: '../src/images/icon-location.svg',
+      iconUrl: iconLocation,
     });
     return;
   })();

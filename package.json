@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/gitraya/ip-address-tracker#readme",
   "devDependencies": {
+    "css-loader": "^5.2.0",
     "dotenv-webpack": "^7.0.2",
+    "file-loader": "^6.2.0",
+    "style-loader": "^2.0.0",
+    "svg-url-loader": "^7.1.1",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0"
   }
