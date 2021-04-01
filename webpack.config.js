@@ -2,7 +2,7 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -11,6 +11,19 @@ module.exports = {
   plugins: [new Dotenv()],
   module: {
     rules: [
+      /* babel loader */
+      {
+        test: /\.js$/,
+        exclude: '/node_modules/',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        ],
+      },
       {
         test: /\.css$/,
         use: [
@@ -38,19 +51,6 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-          },
-        ],
-      },
-      /* babel loader */
-      {
-        test: /\.js$/,
-        exclude: '/node_modules/',
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
           },
         ],
       },
