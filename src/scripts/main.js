@@ -19,9 +19,7 @@ const main = () => {
         }
       )
     );
-    markerIcon = L.icon({
-      iconUrl: iconLocation,
-    });
+    markerIcon = L.icon({ iconUrl: iconLocation });
     return;
   })();
 
