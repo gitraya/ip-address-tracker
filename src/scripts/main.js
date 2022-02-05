@@ -1,18 +1,18 @@
-import iconLocation from '../images/icon-location.svg';
+import iconLocation from "../images/icon-location.svg";
 
 const main = () => {
   // initialize map data
   let map, marker, markerIcon;
   (function initMap() {
-    map = L.map('mapid');
+    map = L.map("mapid");
     map.addLayer(
       new L.tileLayer(
-        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
           attribution:
             'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
           maxZoom: 18,
-          id: 'mapbox/streets-v11',
+          id: "mapbox/streets-v11",
           tileSize: 512,
           zoomOffset: -1,
           accessToken: process.env.MAP_TOKEN,
@@ -33,11 +33,11 @@ const main = () => {
   }
 
   // url ip geolocation API
-  const ipUrl = new URL('https://geo.ipify.org/api/v1?');
+  const ipUrl = new URL("https://geo.ipify.org/api/v1?");
   let ipParams = {
     apiKey: process.env.IPIFY,
-    ipAddress: '',
-    domain: '',
+    ipAddress: "",
+    domain: "",
   };
   let ipUrlParams = new URLSearchParams({ ...ipParams });
   let ipData = new Object();
@@ -50,7 +50,7 @@ const main = () => {
       if (data.messages)
         return (data = {
           message:
-            'Unable to find the data you requested, it may be that the domain or IP address is not available!',
+            "Unable to find the data you requested, it may be that the domain or IP address is not available!",
         });
       return data;
     } catch (err) {
@@ -60,20 +60,22 @@ const main = () => {
 
   // set API data to elements
   function setDataToElement(data) {
-    document.querySelector('.js-ip-address').innerText = data.ip;
+    document.querySelector(".js-ip-address").innerText = data.ip;
     document.querySelector(
-      '.js-location'
+      ".js-location"
     ).innerText = `${data.location.city}, ${data.location.country} ${data.location.geonameId}`;
     document.querySelector(
-      '.js-timezone'
+      ".js-timezone"
     ).innerText = `UTC ${data.location.timezone}`;
-    document.querySelector('.js-isp').innerText = data.isp;
+    document.querySelector(".js-isp").innerText = data.isp;
   }
 
   // function to check valid domain or valid ip address
   function checkInputValue(inputValue) {
-    const ipRegex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-    const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/;
+    const ipRegex =
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    const domainRegex =
+      /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/;
 
     if (ipRegex.test(inputValue)) {
       return (ipUrlParams = new URLSearchParams({
@@ -86,17 +88,17 @@ const main = () => {
         domain: inputValue,
       }));
     }
-    return alert('Please enter the correct domain format or IP address!');
+    return alert("Please enter the correct domain format or IP address!");
   }
 
   // form element
-  const form = document.querySelector('.header__form');
+  const form = document.querySelector(".header__form");
   form.onsubmit = submitData;
 
   // function to submit form data
   async function submitData(e) {
     e.preventDefault();
-    const inputValue = e.target.querySelector('.input').value;
+    const inputValue = e.target.querySelector(".input").value;
 
     // check valid input
     if (!inputValue) return;
@@ -112,11 +114,11 @@ const main = () => {
     updateMap(ipData.location.lat, ipData.location.lng);
 
     // reset data
-    e.target.querySelector('.input').value = '';
+    e.target.querySelector(".input").value = "";
     ipUrlParams = new URLSearchParams({
       ...ipParams,
-      ipAddress: '',
-      domain: '',
+      ipAddress: "",
+      domain: "",
     });
   }
 

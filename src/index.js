@@ -1,3 +1,3 @@
-import main from './scripts/main.js';
-import './styles/main.css';
-document.addEventListener('DOMContentLoaded', main);
+import "./styles/main.css";
+import main from "./scripts/main.js";
+document.addEventListener("DOMContentLoaded", main);
